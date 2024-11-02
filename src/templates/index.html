@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>genwed Debugging Assistant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        .container {
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+        #prompt {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            margin-top: 10px;
+        }
+        #suggestion {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>genwed debugging assistant</h1>
+        <textarea id="prompt" rows="4" placeholder="Enter your error message or code issue here..."></textarea>
+        <br>
+        <button onclick="getSuggestion()">Get Suggestion</button>
+        <div id="suggestion"></div>
+    </div>
+
+    <script>
+        async function getSuggestion() {
+            const prompt = document.getElementById("prompt").value;
+            const suggestionBox = document.getElementById("suggestion");
+            suggestionBox.innerHTML = "Generating suggestion...";
+
+            const response = await fetch("/get_suggestion", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ prompt: prompt })
+            });
+
+            const data = await response.json();
+            suggestionBox.innerHTML = "<strong>Suggested fix:</strong><br>" + data.suggestion;
+        }
+    </script>
+</body>
+</html>
