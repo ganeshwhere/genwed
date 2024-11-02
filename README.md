@@ -51,7 +51,7 @@ Installation:
 Clone the repository:
 ```bash
 git clone https://github.com/ganeshwhere/genwed.git
-cd genwed-ai-assistant
+cd genwed
 ```
 Install dependencies:
 ```
@@ -64,7 +64,7 @@ Otherwise, train a custom model using Hugging Face’s transformers library.
 
 Run the Flask server:
 ```
-python app.py
+python genwed_app.py
 ```
 
 Access the Web Interface:
